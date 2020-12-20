@@ -1,15 +1,6 @@
 const shortCodeUrl = require("../models/shortCodeUrl");
 
-const yup = require("yup");
 const { nanoid } = require("nanoid");
-
-const newUrlSchema = yup.object().shape({
-  givenCode: yup
-    .string()
-    .trim()
-    .matches(/[0-9a-zA-Z]{4,}/i),
-  url: yup.string().trim().url().required(),
-});
 
 const redirect = async (req, res) => {
   const { route: code } = req.params;
@@ -28,9 +19,8 @@ const redirect = async (req, res) => {
   }
 };
 const store = async (req, res, next) => {
-  let { code, url } = req.body;
+  let { code } = req.body;
   try {
-    await newUrlSchema.validate({ code, url });
     if (!code) {
       code = nanoid(6);
     } else {
@@ -39,21 +29,24 @@ const store = async (req, res, next) => {
         throw new Error("This Code already exist");
       }
     }
-    const newShortCodeUrl = { code, url };
-    const created = await shortCodeUrl.create(newShortCodeUrl);
+    const created = await shortCodeUrl.create({
+      url: req.body.url,
+      code: req.body.code,
+    });
     res.json(created);
+    res.redirect("/");
   } catch (error) {
     next(error);
   }
 };
 const stats = async (req, res) => {
   const { route: code } = req.params;
-  const visitUrl = await shortCodeUrl.findOne({ code });
-  res.send({
-    createdAt: visitUrl.createdAt,
-    lastAccessedAt: visitUrl.updatedAt,
-    visitors: visitUrl.visitors,
-  });
+  const visitedtUrl = await shortCodeUrl.findOne({ code });
+  res.render("stats", { visitedtUrl: visitedtUrl });
 };
 
-module.exports = { redirect, store, stats };
+const showIndex = async (req, res) => {
+  res.render("index");
+};
+
+module.exports = { redirect, store, stats, showIndex };

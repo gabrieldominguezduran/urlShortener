@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <title>Url shortener</title>
+  </head>
+  <body>
+    <main class="container w-50">
+      <h1 class="text-center mt-5">Url shortener</h1>
+      <form action="/getUrl" method="POST">
+        <div class="mb-3">
+          <label for="url" class="form-label">Url</label>
+          <input
+            type="url"
+            class="form-control"
+            id="url"
+            aria-describedby="url"
+          />
+        </div>
+        <div class="mb-3">
+          <p class="text-center lead">
+            Write down your code or click submit for a randome code
+          </p>
+          <label for="code" class="form-label">Code</label>
+          <input type="text" class="form-control" id="code" />
+        </div>
+        <button type="submit" class="btn btn-primary mb-5">Submit</button>
+      </form>
+      <p class="text-center lead display-5">Your code:</p>
+    </main>
+  </body>
+</html>
