@@ -12,7 +12,7 @@ const shortCodetUrlSchema = mongoose.Schema(
     },
     visitors: {
       type: Number,
-      required: "Visits on this url!",
+      required: true,
       default: 0,
     },
   },
