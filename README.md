@@ -42,7 +42,7 @@ You can make a **get request** to `/:route` passing the code of the URL you want
 
 You can check the stats of any url visited on `/:route/stats`
 
-If you want install the API use:
+## If you want install the API use:
 
 ```
 npm install
