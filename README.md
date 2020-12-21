@@ -1,6 +1,6 @@
 # URL Shortener
 
-API build with Node. The API can be use alone or with database, the schema is hosted on mongodb atlas, the included views are and example or what this can do.
+API build with Node. The API can be use alone or with database, the schema is hosted on mongodb atlas, the included views are and example of what this can do.
 
 ---
 
