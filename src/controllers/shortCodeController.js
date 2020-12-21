@@ -9,7 +9,7 @@ const redirect = async (req, res) => {
     if (url) {
       url.visitors++;
       url.save();
-      console.log(url.visitors);
+
       return res.redirect(url.url);
     } else {
       return res.status(404).send({ message: "invalid url" });
@@ -19,21 +19,23 @@ const redirect = async (req, res) => {
   }
 };
 const store = async (req, res, next) => {
-  let { code } = req.body;
   try {
+    let givenCode = req.body.code;
+    code = givenCode.replace(/\s/g, "");
     if (!code) {
       code = nanoid(6);
+    } else if (code.length < 4) {
+      throw new Error("Code must be at least 4 characters");
     } else {
       const existing = await shortCodeUrl.findOne({ code });
       if (existing) {
         throw new Error("This Code already exist");
       }
     }
-    const created = await shortCodeUrl.create({
+    await shortCodeUrl.create({
       url: req.body.url,
-      code: req.body.code,
+      code: code,
     });
-    res.json(created);
     res.redirect("/");
   } catch (error) {
     next(error);
@@ -46,7 +48,8 @@ const stats = async (req, res) => {
 };
 
 const showIndex = async (req, res) => {
-  res.render("index");
+  const getData = await shortCodeUrl.find();
+  res.render("index", { getData: getData });
 };
 
 module.exports = { redirect, store, stats, showIndex };

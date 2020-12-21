@@ -12,11 +12,25 @@
     <title>Url shortener</title>
   </head>
   <body>
-    <main class="container">
-      <h1>Stats</h1>
-      <p>Url created at: <%= visitedtUrl.createdAt %></p>
-      <p>Last time visited: <%= visitedtUrl.updatedAt %></p>
-      <p>Number of visitors: <%= visitedtUrl.visitors %></p>
+    <main class="container w-50 mx-auto mt-5 d-flex flex-column">
+      <h1 class="text-center">Stats</h1>
+      <% const options = { weekday: 'long', year: 'numeric', month: 'long', day:
+      'numeric'}; %>
+      <p class="text-center">
+        Url created at: <%= visitedtUrl.createdAt.toLocaleDateString(undefined,
+        options) %> at <%= visitedtUrl.createdAt.getUTCHours() %>:<%=
+        visitedtUrl.createdAt.getUTCMinutes()%> h
+      </p>
+      <p class="text-center">
+        Last time visited: <%=
+        visitedtUrl.updatedAt.toLocaleDateString(undefined, options) %> at <%=
+        visitedtUrl.updatedAt.getUTCHours() %>:<%=
+        visitedtUrl.updatedAt.getUTCMinutes()%> h
+      </p>
+      <p class="text-center">
+        This link has been visited
+        <strong><%= visitedtUrl.visitors %></strong> times
+      </p>
     </main>
   </body>
 </html>
