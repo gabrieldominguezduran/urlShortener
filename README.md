@@ -38,6 +38,8 @@ If the code exists already it will throw an error.
 
 You can make a **get request** to `/:route` passing the code of the URL you want to be redirected to.
 
+## Checking url stats
+
 You can check the stats of any url visited on `/:route/stats`
 
 If you want install the API use:
