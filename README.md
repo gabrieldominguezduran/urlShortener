@@ -32,7 +32,7 @@ params: {
 If the code exists already it will throw an error.
 
 - **url**: it must be an valid URL.
-- **code**: It's a optional parameter, can be digits upper and lower case letters, it's case sensitive.
+- **code**: It's an optional parameter, can be digits upper and lower case letters, it's case sensitive.
 
 ## Redirecting to original URL
 
