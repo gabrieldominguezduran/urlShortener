@@ -16,7 +16,7 @@ Example:
 
 ```
 params: {
-    "url":"https://github.com/raymag/shmag"
+    "url":"https://github.com/gabrieldominguezduran"
 }
 ```
 
