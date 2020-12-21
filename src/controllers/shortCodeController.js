@@ -18,7 +18,7 @@ const redirect = async (req, res) => {
     return res.status(404).send({ message: "invalid url" });
   }
 };
-const store = async (req, res, next) => {
+const store = async (req, res) => {
   try {
     let givenCode = req.body.code;
     code = givenCode.replace(/\s/g, "");
@@ -38,7 +38,7 @@ const store = async (req, res, next) => {
     });
     res.redirect("/");
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 };
 const stats = async (req, res) => {
