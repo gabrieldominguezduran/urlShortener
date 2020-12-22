@@ -22,14 +22,15 @@ const store = async (req, res) => {
   try {
     let givenCode = req.body.code;
     code = givenCode.replace(/\s/g, "");
+
     if (!code) {
       code = nanoid(6);
-    } else if (code.length < 4) {
-      throw new Error("Code must be at least 4 characters");
+    } else if (code.length < 4 || !code.match("^[A-Za-z0-9]*$")) {
+      throw new Error("Invalid code");
     } else {
       const existing = await shortCodeUrl.findOne({ code });
       if (existing) {
-        throw new Error("This Code already exist");
+        throw new Error("Code already exist");
       }
     }
     await shortCodeUrl.create({
